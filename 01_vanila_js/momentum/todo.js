@@ -4,7 +4,21 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
 const TODOS_LS = "toDos";
 
-const toDos = [];
+let toDos = [];
+
+
+function deleteToDo(event){
+    const btn = event.target;
+    const li = btn.parentNode;
+    toDoList.removeChild(li);
+    
+    const cleanToDos = toDos.filter(function(toDo){
+        return toDo.id !== parseInt(li.id);
+    });   //filter는 array의 모든 아이템을 통해 함수를 실행하고, true인 아이템들만 가지고 새로운 array를 만듬.
+    console.log(cleanToDos);
+    toDos = cleanToDos;
+    saveToDos();
+}
 
 function saveToDos(){
     localStorage.setItem(TODOS_LS, JSON.stringify(toDos));  //JSON.stringify()는 javascript로 찍힌 텍스트를 문자열로 바꿔줌 : object -> '문자'
@@ -14,6 +28,7 @@ function paintToDo(text){
     const li = document.createElement("li");
     const delBtn = document.createElement("button");
     delBtn.innerText = "X";
+    delBtn.addEventListener("click", deleteToDo);
     const span = document.createElement("span");
     const newId = toDos.length + 1; //toDos 의 array값이 처음 0일때 +1 해서 아이디: 1이 된다
     span.innerText = text;
