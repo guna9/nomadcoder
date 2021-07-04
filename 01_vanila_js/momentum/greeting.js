@@ -7,11 +7,11 @@ const USER_LS = "currentUser",
       SHOWING_CN = "showing";
 
 function saveName(text){
-    localStorage.setItem(USER_LS, text);
+    localStorage.setItem(USER_LS, text);  //localStorage에 key와 value 저장
 }
 
 function handleSubmit(event){
-    event.preventDefault();
+    event.preventDefault();  //이벤트의 기본동작을 막음
     const currentValue = input.value;
     paintGreeting(currentValue);
     saveName(currentValue);
@@ -19,7 +19,7 @@ function handleSubmit(event){
 
 function askForName(){
     form.classList.add(SHOWING_CN);
-    form.addEventListener("submit", handleSubmit);
+    form.addEventListener("submit", handleSubmit);  //form에 input값이 submit 되면 handleSubmit 작동
 }
 
 function paintGreeting(text){
